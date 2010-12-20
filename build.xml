@@ -15,8 +15,9 @@
 	<property name="build" value="build" />
 	<property name="source" value="src" />
 	<property name="classes" value="classes" />
+	<property name="resources" value="res" />
 	<property name="manifest" value="manifest.mf" />
-	<property name="jar" value="divide-1.0.1.jar" />
+	<property name="jar" value="divide-1.0.2.jar" />
 	
     <target name="clean" description="delete 'build' folder">
         <delete dir="${build}" />
@@ -25,10 +26,16 @@
     <target name="compile" depends="clean" description="compile *.java to *.class">
     	<mkdir dir="${build}/${classes}" />
     	<javac srcdir="${source}" destdir="${build}/${classes}" />
+    	<copy todir="${build}/${classes}">
+    		<fileset dir="${resources}">
+    		</fileset>
+    	</copy>
 	</target>
 
 	<target name="jar" depends="compile" description="pack *.classes into .jar">
-		<echo file="${build}/${manifest}">Main-Class: org.bond.divide.App</echo>
+		<echo file="${build}/${manifest}">Main-Class: org.bond.divide.App
+Icon: _by_.ico, _by_.png
+</echo>
 		<jar jarfile="${build}/${jar}" basedir="${build}/${classes}"
 				manifest="${build}/${manifest}" />
 	</target>

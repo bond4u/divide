@@ -212,6 +212,13 @@ public class App extends JFrame implements Runnable {
 	protected void divide() {
 		browse.setEnabled(false);
 		divide.setEnabled(false);
+		total.setText("-");
+		noBy.setText("-");
+		manyBy.setText("-");
+		dupe.setText("-");
+		dir.setText("-");
+		move.setText("-");
+		error.setText("-");
 //		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		new Thread(this).run();
 	}

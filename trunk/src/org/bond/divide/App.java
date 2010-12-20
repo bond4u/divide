@@ -59,7 +59,7 @@ public class App extends JFrame implements Runnable {
 	private List<String> errors = new ArrayList<String>();
 	
 	public App() {
-		super("Divide-1.0.1");
+		super("Divide-1.0.2");
 		setMinimumSize(new Dimension(400, 200));
 		LayoutManager lm = new GridLayout(3, 1);
 		setLayout(lm);
@@ -266,13 +266,13 @@ public class App extends JFrame implements Runnable {
 			String auth = ext.substring(0, dot);
 			// file extension is after dot
 			ext = ext.substring(dot);
-			// remove garbage after dash
+			// remove garbage after dash if present
 			int dash = auth.lastIndexOf('-');
-			auth = auth.substring(0, dash);
-			// take first part + extension
-			String file = s[0] + ext;
+			if (dash != -1) {
+				auth = auth.substring(0, dash);
+			}
 //			log("s=" + file + " by " + auth);
-			moveFile(f, auth, file);
+			moveFile(f, auth);
 		} else if (s.length > 2) {
 //			log("manyBYs=" + f.getName());
 			manyBys.add(f.getName());
@@ -282,12 +282,12 @@ public class App extends JFrame implements Runnable {
 		}
 	}
 	
-	protected void moveFile(File f, String a, String n) {
+	protected void moveFile(File f, String a) {
 		String parent = f.getParent();
 //		log("dir=" + dir);
 		File d = new File(parent + "/" + a);
 //		log("authorDir=" + d + "; exists=" + d.exists());
-		File t = new File(d.getPath() + "/" + n);
+		File t = new File(d.getPath() + "/" + f.getName());
 //		log("target=" + t + "; exists=" + t.exists());
 		final boolean exists = t.exists();
 		if (exists) {

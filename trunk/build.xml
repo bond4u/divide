@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     20.12.2010 20:01:26                                                        
+
+     Divide - sort files by author.
+     
+     bond                                                                
+     ====================================================================== -->
+
+<project name="divide" default="jar">
+    <description>
+            Divide - move files into author folders.
+    </description>
+
+	<property name="build" value="build" />
+	<property name="source" value="src" />
+	<property name="classes" value="classes" />
+	<property name="manifest" value="manifest.mf" />
+	<property name="jar" value="divide-1.0.1.jar" />
+	
+    <target name="clean" description="delete 'build' folder">
+        <delete dir="${build}" />
+    </target>
+
+    <target name="compile" depends="clean" description="compile *.java to *.class">
+    	<mkdir dir="${build}/${classes}" />
+    	<javac srcdir="${source}" destdir="${build}/${classes}" />
+	</target>
+
+	<target name="jar" depends="compile" description="pack *.classes into .jar">
+		<echo file="${build}/${manifest}">Main-Class: org.bond.divide.App</echo>
+		<jar jarfile="${build}/${jar}" basedir="${build}/${classes}"
+				manifest="${build}/${manifest}" />
+	</target>
+</project>
